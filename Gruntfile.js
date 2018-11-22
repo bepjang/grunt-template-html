@@ -21,14 +21,15 @@ module.exports = function (grunt) {
 
         // html task
         includes: {
-            build: {
-                cwd: 'app/docs/html/',
+            dist: {
+                expand: true,
+                cwd: 'src/docs/html/',
                 src: ['**/*.html'],
-                dest: 'dist',
+                dest: 'dest',
                 options: {
                     flatten: true,
                     // debug: true,
-                    includePath: 'app/docs/include/'
+                    includePath: 'src/docs/include/'
                 }
             }
         },
@@ -36,7 +37,7 @@ module.exports = function (grunt) {
             options: {
                 htmlhintrc: 'grunt/.htmlhintrc'
             },
-            dist: 'dist/**/*.html'
+            dist: 'dest/**/*.html'
         },
 
         clean: {
@@ -44,7 +45,7 @@ module.exports = function (grunt) {
                 files: [{
                     dot: true,
                     src: [
-                        'dist/**/*'
+                        'dest/**/*'
                     ]
                 }]
             },
@@ -55,7 +56,7 @@ module.exports = function (grunt) {
         watch: {
             options: { livereload: true },
             html: {
-                files: ['app/docs/**/*.html'],
+                files: ['src/docs/**/*.html'],
                 tasks: ['htmlhint', 'includes']
             },
         },
@@ -66,7 +67,7 @@ module.exports = function (grunt) {
                     hostname: 'localhost',
                     livereload: 35729,
                     // keepalive: true,
-                    base: 'dist',
+                    base: 'dest',
                     open: 'http://<%= connect.server.options.hostname %>:<%= connect.server.options.port %>/category1/page-02.html'
                 }
             }
